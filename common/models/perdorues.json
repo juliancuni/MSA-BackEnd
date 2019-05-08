@@ -1,0 +1,121 @@
+{
+    "name": "Perdorues",
+    "plural": "Perdoruesit",
+    "base": "User",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
+    },
+    "properties": {
+        "emer": {
+            "type": "string",
+            "required": true
+        },
+        "mbiemer": {
+            "type": "string",
+            "required": true
+        },
+        "adresa": {
+            "type": "string",
+            "default": "TR"
+        },
+        "email": {
+            "type": "string",
+            "default": "info@artservis.al"
+        },
+        "tel": {
+            "type": "string",
+            "required": true
+        },
+        "enabled": {
+            "type": "boolean",
+            "required": true,
+            "default": true
+        },
+        "checkedIn": {
+            "type": "boolean",
+            "required": true,
+            "default": false
+        },
+        "meTimeAtt": {
+            "type": "boolean",
+            "required": true,
+            "default": true
+        },
+        "matOret": {
+            "type": "boolean",
+            "required": true,
+            "default": true
+        },
+        "foto": {
+            "type": "string",
+            "required": true,
+            "default": "assets/img/user/nopic.png"
+        },
+        "attId": {
+            "type": "number",
+            "required": true
+        },
+        "gishtId": {
+            "type": "number"
+        },
+        "passNePajisje": {
+            "type": "string"
+        },
+        "privilegjiNePajisje": {
+            "type": "string"
+        }
+    },
+    "validations": [],
+    "relations": {
+        "rolet": {
+            "type": "hasMany",
+            "model": "Role",
+            "foreignKey": "principalId",
+            "through": "RoleMapping"
+        },
+        "timeAttendances": {
+            "type": "hasMany",
+            "model": "TimeAttendance",
+            "foreignKey": "attId"
+        },
+        "org": {
+            "type": "belongsTo",
+            "model": "org",
+            "foreignKey": "realm"
+        }
+    },
+    "acls": [
+        {
+            "accessType": "*",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "DENY"
+        },
+        {
+            "accessType": "*",
+            "principalType": "ROLE",
+            "principalId": "$authenticated",
+            "permission": "DENY"
+        },
+        {
+            "accessType": "*",
+            "principalType": "ROLE",
+            "principalId": "root",
+            "permission": "ALLOW"
+        },
+        {
+            "accessType": "*",
+            "principalType": "ROLE",
+            "principalId": "admin",
+            "permission": "ALLOW"
+        },
+        {
+            "accessType": "*",
+            "principalType": "ROLE",
+            "principalId": "$owner",
+            "permission": "ALLOW"
+        }
+    ],
+    "methods": {}
+}

@@ -1,0 +1,55 @@
+{
+    "name": "org",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
+    },
+    "properties": {
+        "domain": {
+            "type": "string",
+            "required": true,
+            "description": "Domain i organizates. S'mund te lihet bosh!"
+        }
+    },
+    "validations": [],
+    "relations": {
+        "orgPrivateData": {
+            "type": "hasOne",
+            "model": "orgPrivateData",
+            "foreignKey": ""
+        },
+        "perdorues": {
+            "type": "hasMany",
+            "model": "Perdorues",
+            "foreignKey": "realm"
+        },
+        "timeAttendances": {
+            "type": "hasMany",
+            "model": "TimeAttendance",
+            "foreignKey": "timeAttId"
+        }
+    },
+    "acls": [
+        {
+            "accessType": "*",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "DENY"
+        },
+        {
+            "accessType": "READ",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW",
+            "property": "findOne"
+        },
+        {
+            "accessType": "*",
+            "principalType": "ROLE",
+            "principalId": "root",
+            "permission": "ALLOW"
+        }
+    ],
+    "methods": {}
+}
